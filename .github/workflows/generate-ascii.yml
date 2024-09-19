@@ -13,7 +13,8 @@ jobs:
         cowsay -f dragon "Corre por tu vida, soy un dragon RAAAAWR" >> dragon.txt
         sleep 10
 
-  test_job_1:
+  test_job_2:
+    needs: build_job_1
     runs-on: ubuntu-latest
     steps:
     - name: Test file exist
@@ -22,6 +23,7 @@ jobs:
         grep -i "dragon" dragon.txt
     
   deploy_job_3:
+    needs: test_job_2
     runs-on: ubuntu-latest
     steps:
     - name: Read and Deploy
